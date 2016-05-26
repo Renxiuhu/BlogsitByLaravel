@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Query\Grammars;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Query\Builder;
 
 class MySqlGrammar extends Grammar
@@ -53,6 +54,17 @@ class MySqlGrammar extends Grammar
         $joiner = $union['all'] ? ' union all ' : ' union ';
 
         return $joiner.'('.$union['query']->toSql().')';
+    }
+
+    /**
+     * Compile the random statement into SQL.
+     *
+     * @param  string  $seed
+     * @return string
+     */
+    public function compileRandom($seed)
+    {
+        return 'RAND('.$seed.')';
     }
 
     /**
@@ -136,6 +148,25 @@ class MySqlGrammar extends Grammar
             return $value;
         }
 
+        if (Str::contains($value, '->')) {
+            return $this->wrapJsonSelector($value);
+        }
+
         return '`'.str_replace('`', '``', $value).'`';
+    }
+
+    /**
+     * Wrap the given JSON selector.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    protected function wrapJsonSelector($value)
+    {
+        $path = explode('->', $value);
+
+        $field = $this->wrapValue(array_shift($path));
+
+        return $field.'->'.'"$.'.implode('.', $path).'"';
     }
 }
