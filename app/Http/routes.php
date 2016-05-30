@@ -12,9 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/blog');
 });
 
+Route::get('blog', 'BlogController@index');
+Route::get('blog/{slug}', 'BlogController@showPost');//根据文章名获取文章
 /*
 |--------------------------------------------------------------------------
 | Application Routes
