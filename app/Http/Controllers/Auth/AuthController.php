@@ -29,7 +29,7 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/admin/post'; //登录成功后跳转到管理员博客列表页面
-    protected $redirectAfterLogout = '/auth/login';//注销成功后跳转到登录页面
+    protected $redirectAfterLogout = '/';//注销成功后跳转到博客列表页面
     /**
      * Create a new authentication controller instance.
      *
