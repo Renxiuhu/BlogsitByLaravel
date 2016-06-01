@@ -22,26 +22,29 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-//博客列表和博客详细内容路由
-Route::get('/', function () {
-	return redirect('/blog');
-});
-Route::get('blog', 'BlogController@index');
-Route::get('blog/{slug}', 'BlogController@showPost');//根据文章名获取文章
 
-//后台管理系统相关路由
-Route::get("admin",function (){
-	return redirect("/admin/post");
-});
-Route::group(['middleware' => 'auth'],function(){
+Route::group(['middleware' => ['web','auth']],function(){
 	Route::resource('admin/post','Admin\PostController');//管理员管理博客文章相关路由
 	Route::resource('admin/tag','Admin\TagController');
 	Route::get('admin/upload','Admin\UploadController@index');//管理员上传路由
 });
+
 Route::group(['middleware' => 'web'], function () {
+	//博客列表和博客详细内容路由
+	Route::get('/', function () {
+		return redirect('/blog');
+	});
+	Route::get('blog', 'BlogController@index');
+	Route::get('blog/{slug}', 'BlogController@showPost');//根据文章名获取文章
+	
+	//后台管理系统相关路由
+	Route::get("admin",function (){
+		return redirect("/admin/post");
+	});
 	//登录路由
-	Route::get('auth/login','Auth\AuthController@getLogin');//使用框架自带的控制器
-	Route::post('auth/login','Auth\AuthController@postLogin');
+	Route::get('auth/login','Auth\AuthController@showLoginForm');//使用框架自带的控制器
+	Route::post('auth/login','Auth\AuthController@login');
+	//注销路由
+	Route::get('auth/logout','Auth\AuthController@logout');
 });
-//注销路由
-Route::get('auth/logout','Auth\AuthController@getLogout');
+
