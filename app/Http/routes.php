@@ -29,14 +29,16 @@ Route::get('/', function () {
 Route::get('blog', 'BlogController@index');
 Route::get('blog/{slug}', 'BlogController@showPost');//根据文章名获取文章
 
-Route::group(['middleware' => ['web']], function () {
-	//后台管理系统相关路由
-	Route::get("admin",function (){
-		return redirect("/admin/post");
-	});
+//后台管理系统相关路由
+Route::get("admin",function (){
+	return redirect("/admin/post");
+});
+Route::group(['middleware' => 'auth'],function(){
 	Route::resource('admin/post','Admin\PostController');//管理员管理博客文章相关路由
 	Route::resource('admin/tag','Admin\TagController');
 	Route::get('admin/upload','Admin\UploadController@index');//管理员上传路由
+});
+Route::group(['middleware' => 'web'], function () {
 	//登录路由
 	Route::get('auth/login','Auth\AuthController@getLogin');//使用框架自带的控制器
 	Route::post('auth/login','Auth\AuthController@postLogin');

@@ -12,14 +12,15 @@
 7,添加视图文件：
     blog.index显示所有文章；
     blog.post显示某一篇文章
-8，下载bootstrap css文件，用于支持分页切换样式
+8，下载bootstrap css文件，用于支持分页切换样式；
+    jquery和bootstrap的js文件下载
 
 
 //============================================================================
 //博客后台管理系统实现
 1，设置后台管理相关的路由：
-    其中管理员功能需要在web中间件路由分组中，保证非管理员无法访问
-    登录功能要在web中间件路由分组中，保证session等开启
+    其中管理员功能需要在auth中间件路由分组中，保证非管理员无法访问
+    登录功能要在web中间件路由分组中，保证session等功能开启
 2，修改登录相关跳转路由
     修改Authenticate中间件，如果没有登录跳转到登录页面
     修改auth控制器
@@ -39,3 +40,16 @@
 //小修改
 1，修改博客列表和博客内容页面继承主题模板
 2，修改注销成功后跳转到博客列表页面
+
+//==============================================================================
+//文件标签Tag查询的实现
+1，创建tags表用于保存文章标签，同时添加迁移
+    php artisan make:model --migration Tag
+   创建tags与posts表之间的多对多关联关系表
+    php artisan make:migration --create=post_tag_pivot create_post_tag_pivot
+2，生成上述两个表
+    php artisan migrate
+3，实现admin.tag.index视图，同时修改tag控制器的index方法显示所有的tag标签
+4, 创建admin.success视图，导入到admin.tag.index视图
+5，下载DataTable插件的js和css文件，导入到admin.layout视图，使得tag显示表格功能增强
+

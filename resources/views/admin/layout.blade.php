@@ -8,6 +8,7 @@
         <title>{{ config('blog.title') }} Admin</title>
 
         <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/dataTables.min.css" rel="stylesheet">
         <!-- 继承自该布局的子视图的 styles 区块内容 -->
         @yield('styles')
     </head>
@@ -37,6 +38,7 @@
 		<!-- 加载Javascript脚本 -->
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/dataTables.min.js"></script>
         @yield('scripts')
 
     </body>
