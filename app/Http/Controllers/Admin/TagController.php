@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\TagCreateRequest;
+use App\Http\Requests\TagUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Tag;
 
@@ -89,7 +90,14 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+    	//先根据id获取到指定的数据行
+    	$tag=Tag::findOrFail($id);
+    	$data=['id'=>$id];//先加上id，因为$field中没有id字段
+    	foreach (array_keys($this->fields) as $field) {
+        	$data[$field] = old($field, $tag->$field);
+   		}
+    	
+    	return view('admin.tag.edit',$data);
     }
 
     /**
@@ -99,9 +107,17 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
-        //
+        $tag=Tag::findOrFail($id);
+        //tag名不允许修改，因此设置值时排除tag
+        foreach (array_keys(array_except($this->fields, ['tag'])) as $field) {
+        	$tag->$field = $request->get($field);
+        }
+        $tag->save();
+        
+        //跳转到tag index页面
+        return redirect('/admin/tag')->withSuccess("The tag '$tag->tag' was updated.");
     }
 
     /**
@@ -112,6 +128,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+    	$tag->delete();
+
+    	return redirect('/admin/tag')
+                    ->withSuccess("The '$tag->tag' tag has been deleted.");
     }
 }

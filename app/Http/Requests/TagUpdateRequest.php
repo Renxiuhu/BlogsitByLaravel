@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class TagCreateRequest extends Request
+class TagUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,7 @@ class TagCreateRequest extends Request
      */
     public function rules()
     {
-		return [ 
-				'tag' => 'required|unique:tags',
+        return [ 
 				'title' => 'required',
 				'subtitle' => 'required',
 				'layout' => 'required' 

@@ -67,3 +67,14 @@
 4，创建request类，实现其中的验证方法，验证每个表单项是否符合要求
     php artisan make:request TagCreateRequest
 5，实现控制器中store方法，保存tag，参数为第4步的request类，会自动检测
+
+//================================================================================
+//文章标签tag修改删除的实现
+1，编辑tag控制器中edit方法，根据id获取指定行数据，传递给edit视图显示
+2，创建edit对应的视图文件，保存form提交指向update方法
+3，创建request类，实现其中的验证方法，验证每个表单项是否符合要求
+    php artisan make:request TagUpdateRequest
+4，实现update方法，request参数类型为之前创建的request验证类，更新数据
+5，创建删除对话框视图
+6，将删除对话框视图包含到tag.index视图，每一列添加删除按钮
+7，实现控制器delete方法

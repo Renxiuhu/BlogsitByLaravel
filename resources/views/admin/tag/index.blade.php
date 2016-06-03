@@ -52,10 +52,15 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="/admin/tag/{{ $tag->id }}/edit" class="btn btn-xs btn-info">
+                                <a href="/admin/tag/{{ $tag->id }}/edit" class="btn btn-primary btn-md">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
+                                <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#modal-delete">
+                                    <i class="fa fa-times-circle"></i>
+                                    Delete
+                                </button>
                             </td>
+                            @include('admin.tag.deldialog')
                         </tr>
                     @endforeach
                     </tbody>
@@ -63,6 +68,7 @@
             </div>
         </div>
     </div>
+    
 @stop
 
 @section('scripts')
