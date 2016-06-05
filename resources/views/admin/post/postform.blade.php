@@ -71,7 +71,7 @@
             <div class="col-md-8">
                 <select name="tags[]" id="tags" class="form-control" multiple>
                 @foreach ($tags as $tag)
-                    <option @if (in_array($tag, $selectedtags)) selected @endif value="{{ $tag->tag}}">
+                    <option  {{in_array($tag->tag, $selectedtags)? 'selected':''}} value="{{ $tag->tag}}">
                         {{ $tag->tag }}
                     </option>
                 @endforeach

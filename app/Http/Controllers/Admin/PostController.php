@@ -109,7 +109,7 @@ class PostController extends Controller
     	$when = Carbon::now()->addHour();
     	$data['publish_date'] = $when->format('M-j-Y');
     	$data['publish_time'] = $when->format('g:i A');
-    	 
+    	
     	return view('admin.post.edit',$data);
     }
 
