@@ -17,4 +17,9 @@ class Post extends Model
             $this->attributes['slug'] = str_slug($value);
         }
     }
+    
+    //定义文章与标签之间多对多关系
+    public function tags(){
+    	return $this->belongsToMany('App\Tag','post_tag_pivot');
+    }
 }

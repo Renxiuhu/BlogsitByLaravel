@@ -78,3 +78,12 @@
 5，创建删除对话框视图
 6，将删除对话框视图包含到tag.index视图，每一列添加删除按钮
 7，实现控制器delete方法
+
+//==============================================================================
+//文章表和模型的修改
+1，创建新的posts迁移文件，在原有基础上修改表的结构
+    php artisan make:migration --table=posts restructure_posts_table
+2，安装doctrine/dbal依赖包，运行迁移
+	composer require "doctrine/dbal"
+	php artisan migrate
+3，修改post和tag模型，建立两者之间多对多关系
