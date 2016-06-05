@@ -45,6 +45,11 @@
                                 <a href="/blog/{{$post->slug}}" class="btn btn-primary btn-md">
                                     <i class="fa fa-edit"></i> view
                                 </a>
+                                <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#modal-delete">
+                                    <i class="fa fa-times-circle"></i>
+                                    Delete
+                                </button>
+                                @include('admin.post.deldialog')
                         </tr>
                     @endforeach
                     </tbody>

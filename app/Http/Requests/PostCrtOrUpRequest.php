@@ -46,7 +46,7 @@ class PostCrtOrUpRequest extends Request
 				'meta_description' => $this->meta_description,
 				'is_draft' => ( bool ) $this->is_draft,
 				'published_at' => $published_at,
-				'layout' => $this->layout 
+				'layout' => $this->layout,
 		];
 	}
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\PostCrtOrUpRequest;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -90,7 +91,26 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        //根据id获取指定的文章数据，传递给视图
+    	$post=Post::findOrFail($id);
+    	$data=['id'=>$id];
+    	$data['title'] =old('title',$post->title);
+    	$data['subtitle'] =old('subtitle',$post->subtitle);
+    	$data['page_image'] =old('page_image',$post->page_image);
+    	$data['content']=old('content',$post->content_raw);
+    	$data['page_image'] =old('page_image',$post->page_image);
+    	$data['meta_description']=old('meta_description',$post->meta_description);
+    	$data['is_draft'] =old('is_draft',$post->is_draft);
+    	$data['layout'] =old('layout',$post->layout);
+    	$data['tags']=old('tags',Tag::all('tag'));
+    	//从中间表获取tag id再获取tag名
+    	$data['selectedtags']=old('selectedtags',$post->tags()->lists('tag')->all());
+    	//日期要显示现在的日期时间+1小时
+    	$when = Carbon::now()->addHour();
+    	$data['publish_date'] = $when->format('M-j-Y');
+    	$data['publish_time'] = $when->format('g:i A');
+    	 
+    	return view('admin.post.edit',$data);
     }
 
     /**
@@ -100,9 +120,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostCrtOrUpRequest $request, $id)
     {
-        //
+        //更新修改数据到数据库
+    	$post = Post::findOrFail($id);
+    	$post->fill($request->postFillData());
+    	$post->save();
+    	$post->syncTags($request->get('tags', []));
+    	
+    	return redirect()->route('admin.post.index')->withSuccess('Post saved.');
+    	 
     }
 
     /**
@@ -113,6 +140,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //获取指定id的文章
+        $post=Post::findOrFail($id);
+        //删除中间件中记录
+        $post->tags()->detach();
+        //删除posts中文章记录
+        $post->delete();
+        
+        return redirect()->route('admin.post.index')->withSuccess('Post deleted.');
+        
     }
 }
