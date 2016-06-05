@@ -93,6 +93,12 @@
 1，修改post控制器index，获取所有数据并显示
 2，修改post.index视图，用表格显示
 
-
+//==============================================================================
+//admin博客文章的创建和保存
 1,创建文件创建和更新的请求类，两个请求的验证时一样的，所以使用创建一个请求类即可
 	php artisan make:request PostCrtOrUpRequest
+2，修改post控制器create，传递默认form值给create视图
+3，创建post.create视图，以及和update公用的form视图
+4，下载Selectize（下拉列表优化） 和 Pickadate（日期时间选择）的js和css文件，导入到create视图中
+5，修改store方法，使用第一步的请求类作为参数
+6，修改blog路由下文章列表和内容显示，因为posts表列名字变了

@@ -12,7 +12,7 @@
 		<li>
 			<a href="/blog/{{ $post->slug }}">{{ $post->title }}</a> 
 			<em>({{$post->published_at }})</em>
-			<p>{{ str_limit($post->content) }}</p>
+			<p>{{ str_limit($post->content_raw) }}</p>
 		</li> @endforeach
 	</ul>
 	<hr>

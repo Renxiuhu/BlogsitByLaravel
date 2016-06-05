@@ -35,7 +35,7 @@
                     @foreach ($posts as $post)
                         <tr>
                         	<!-- data-order用于DataTable表进行排序 -->
-                            <td data-order="{{ $post->published_at->timestamp}}">{{ $post->published_at }}</td>
+                            <td data-order="{{ $post->published_at->timestamp}}">{{ $post->published_at->format('j-M-y g:ia') }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->subtitle }}</td>
                             <td>
