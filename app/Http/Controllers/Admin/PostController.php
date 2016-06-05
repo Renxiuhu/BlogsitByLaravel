@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -16,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-    	return view('admin.post.index');//显示博客首页
+    	//获取posts表所有记录显示在视图中
+    	return view('admin.post.index')->withPosts(Post::all());//显示博客首页
     }
 
     /**

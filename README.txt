@@ -87,3 +87,12 @@
 	composer require "doctrine/dbal"
 	php artisan migrate
 3，修改post和tag模型，建立两者之间多对多关系
+
+//==============================================================================
+//admin文章表index显示
+1，修改post控制器index，获取所有数据并显示
+2，修改post.index视图，用表格显示
+
+
+1,创建文件创建和更新的请求类，两个请求的验证时一样的，所以使用创建一个请求类即可
+	php artisan make:request PostCrtOrUpRequest
