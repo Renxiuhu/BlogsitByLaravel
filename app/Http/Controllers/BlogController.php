@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-use Carbon\Carbon;
+use App\Jobs\BlogIndexDataFilter;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$posts = Post::where('published_at', '<=', Carbon::now())
-				->orderBy('published_at', 'desc')
-				->paginate(config('blog.posts_per_page'));//读取配置文件中的值分页
-	
+		//使用BlogIndexDataFilter Job获取需要的数据传递给视图
+		$posts=$this->dispatch(new BlogIndexDataFilter($request->get('tag')));
+		
 		return view('blog.index', compact('posts'));
 	}
 	

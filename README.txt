@@ -110,3 +110,12 @@
 3，创建edit试图，导入公共的form视图
 4，修改post控制器edit方法，获取post的各个参数传递给视图显示
 5，修改post控制器update方法，保存修改，并保存中间表内容
+
+//================================================================================
+//博客列表：根据标签过滤列表
+1，创建一个独立的任务Job，用于将复杂逻辑从控制器中剔除
+    php artisan make:job BlogIndexDataFilter
+2，BlogIndexDataFilter取消实现ShouldQueue接口，不然会导致数据无法从Job传到controller
+3，编辑Job handle方法，实现有标签则过滤显示该标签下的博客，无标签则显示全部博客
+4，修改blog控制器index方法，调用job获取博客列表数据
+5，修改blog.index视图，判断传入的数据为空时什么都不显示
