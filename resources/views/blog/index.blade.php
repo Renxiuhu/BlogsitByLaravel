@@ -49,14 +49,14 @@
               <li class="previous">
                 <a href="{!! $posts->url($posts->currentPage() - 1) !!}">
                   <i class="fa fa-long-arrow-left fa-lg"></i>
-                  Previous Page >>
+                  << Previous Page 
                 </a>
               </li>
             @endif
             @if ($posts->hasMorePages())
               <li class="next">
                 <a href="{!! $posts->nextPageUrl() !!}">
-                  << Next Page
+                   Next Page >>
                   <i class="fa fa-long-arrow-right"></i>
                 </a>
               </li>
