@@ -139,3 +139,13 @@
 //bug 修复
 1，修复在blog页面，logout下拉菜单无法显示问题
 	引用js时jquery.js必须在bootstrap.js前面才能使dropdown生效
+	
+//==================================================================================
+//contact us邮件发送功能实现（自己给自己发信息）
+1，修改.env有关邮件的配置，修改config/mail.php相关配置
+2，添加路由，指向邮件控制器
+3，生成邮件控制器，实现get显示提交信息from和post发送邮件
+	php artisan make:controller ContactController
+4，实现请求验证类，对form项进行验证
+	php artisan make:request ContactMeRequest
+5，实现contact form视图和邮件内容视图

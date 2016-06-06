@@ -45,5 +45,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('auth/login','Auth\AuthController@login');
 	//注销路由
 	Route::get('auth/logout','Auth\AuthController@logout');
+	//contact us路由
+	Route::get('contact','ContactController@showForm');
+	Route::post('contact','ContactController@sendMail');
 });
 
