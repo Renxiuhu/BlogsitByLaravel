@@ -119,3 +119,14 @@
 3，编辑Job handle方法，实现有标签则过滤显示该标签下的博客，无标签则显示全部博客
 4，修改blog控制器index方法，调用job获取博客列表数据
 5，修改blog.index视图，判断传入的数据为空时什么都不显示
+
+//=================================================================================
+//优化博客列表的显示
+1，创建blog.js文件，复制clean blog开源项目中的代码实现tooltips，并且在用户滚动页面时导航条可以出现在顶端
+   同时需要jquery的js文件支持
+2，创建blog相关页面的主布局视图文件layout
+3，创建blog.css文件，优化样式，会用到fontawesome/bootstrap/cleanblog/jquery的css文件，需要下载
+3，创建blog的导航栏视图，显示内容仍然和admin的导航栏一样，多添加的是为了实现悬浮效果
+4，创建blog的footer视图，仅包含一个copyright
+5，修改blog的index视图，添加头部，修改列表显示和导航样式
+6，在config/blog.php中添加index视图需要的配置项值

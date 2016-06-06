@@ -14,7 +14,7 @@ class BlogController extends Controller
 		//使用BlogIndexDataFilter Job获取需要的数据传递给视图
 		$posts=$this->dispatch(new BlogIndexDataFilter($request->get('tag')));
 		
-		return view('blog.index', compact('posts'));
+		return view('blog.index')->withPosts($posts);
 	}
 	
 	public function showPost($slug)
