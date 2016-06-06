@@ -7,7 +7,7 @@
 return [
 		'title' => 'My Blog', //页标题
 		'posts_per_page' => 10,  //每一页显示的文章数
-		'name' => "Laravel 学院",
+		'name' => "Barret Blog",
 		'subtitle' => 'http://www.barretren.com',
 		'description' => 'Barret Ren自建博客系统',
 		'author' => 'Barret Ren'

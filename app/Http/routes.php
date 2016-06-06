@@ -26,7 +26,6 @@
 Route::group(['middleware' => ['web','auth']],function(){
 	Route::resource('admin/post','Admin\PostController');//管理员管理博客文章相关路由
 	Route::resource('admin/tag','Admin\TagController');
-	Route::get('admin/upload','Admin\UploadController@index');//管理员上传路由
 });
 
 Route::group(['middleware' => 'web'], function () {
