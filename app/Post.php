@@ -16,10 +16,6 @@ class Post extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
-
-        if (! $this->exists) {
-            $this->attributes['slug'] = str_slug($value);
-        }
     }
     
     //定义文章与标签之间多对多关系

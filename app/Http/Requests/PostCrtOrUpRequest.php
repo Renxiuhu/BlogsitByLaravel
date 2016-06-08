@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use Carbon\Carbon;
+use DateTimeZone;
 
 class PostCrtOrUpRequest extends Request
 {
@@ -37,7 +38,7 @@ class PostCrtOrUpRequest extends Request
     
     //自定义方法，从请求数据中获取数据作为数组返回
     public function postFillData() {
-		$published_at = new Carbon ( $this->publish_date . ' ' . $this->publish_time );
+		$published_at = new Carbon ( $this->publish_date . ' ' . $this->publish_time,new DateTimeZone('Asia/Shanghai'));
 		return [ 
 				'title' => $this->title,
 				'subtitle' => $this->subtitle,

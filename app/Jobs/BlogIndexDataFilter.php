@@ -6,6 +6,7 @@ use App\Jobs\Job;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
+use DateTimeZone;
 
 class BlogIndexDataFilter extends Job 
 {
@@ -37,7 +38,7 @@ class BlogIndexDataFilter extends Job
     }
     
     private function getAllBlogData(){
-    	$posts = Post::where ( 'published_at', '<=', Carbon::now () )
+    	$posts = Post::where ( 'published_at', '<=', Carbon::now (new DateTimeZone('Asia/Shanghai')) )
     				->where ( 'is_draft', '0' )
     				->orderBy ( 'published_at', 'desc' )
     				->paginate ( config ( 'blog.posts_per_page' ) );//读取配置文件中的值分页
@@ -49,7 +50,7 @@ class BlogIndexDataFilter extends Job
     	//根据tag名获取对应记录的tag对象
     	$tag = Tag::where('tag', $tagName)->first();//这里不能使用firstOrFail，不然找不到数据时自动异常了
     	if ($tag){
-    		$posts=$tag->posts()->where ( 'published_at', '<=', Carbon::now () )
+    		$posts=$tag->posts()->where ( 'published_at', '<=', Carbon::now (new DateTimeZone('Asia/Shanghai')) )
     		->where ( 'is_draft', '0' )
     		->orderBy ( 'published_at', 'desc' )
     		->paginate ( config ( 'blog.posts_per_page' ) )

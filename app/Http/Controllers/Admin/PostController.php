@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
+use DateTimeZone;
 
 class PostController extends Controller
 {
@@ -106,7 +107,7 @@ class PostController extends Controller
     	//从中间表获取tag id再获取tag名
     	$data['selectedtags']=old('selectedtags',$post->tags()->lists('tag')->all());
     	//日期要显示现在的日期时间+1小时
-    	$when = Carbon::now()->addHour();
+    	$when = Carbon::now(new DateTimeZone('Asia/Shanghai'))->addHour();
     	$data['publish_date'] = $when->format('M-j-Y');
     	$data['publish_time'] = $when->format('g:i A');
     	
