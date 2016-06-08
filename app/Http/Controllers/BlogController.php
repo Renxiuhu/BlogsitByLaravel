@@ -17,10 +17,10 @@ class BlogController extends Controller
 		return view('blog.index')->withPosts($posts);
 	}
 	
-	public function showPost($slug)
+	public function showPost($id)
 	{
 		//whereSlug需要表中存在slug列
-		$post = Post::whereSlug($slug)->firstOrFail();
+		$post = Post::where('id',$id)->firstOrFail();
 		return view('blog.post')->withPost($post);
 	}
 }

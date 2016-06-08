@@ -27,7 +27,7 @@
         @foreach ($posts as $post)
           <div class="post-preview">
             <!--点击标题或副标题显示博客内容-->
-            <a href="/blog/{{ $post->slug }}">
+            <a href="/blog/{{ $post->id }}">
               <h2 class="post-title">{{ $post->title }}</h2>
               @if ($post->subtitle)
                 <h3 class="post-subtitle">{{ $post->subtitle }}</h3>
