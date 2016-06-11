@@ -1,6 +1,15 @@
 <!-- 导入模板 -->
 @extends('admin.layout')
 
+@section('styles')
+    <style>
+        td{
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="container-fluid">
         <div class="row page-title-row">
@@ -26,7 +35,7 @@
                         <tr>
                             <th>Published</th>
                             <th>Title</th>
-                            <th>Subtitle</th>
+                            <th class="hidden-xs">Subtitle</th>
                             <th data-sortable="false">Actions</th>
                         </tr>
                      </thead>
@@ -37,7 +46,7 @@
                         	<!-- data-order用于DataTable表进行排序 -->
                             <td data-order="{{ $post->published_at->timestamp}}">{{ $post->published_at->format('j-M-y g:ia') }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->subtitle }}</td>
+                            <td class="hidden-xs">{{ $post->subtitle }}</td>
                             <td>
                                 <a href="/admin/post/{{ $post->id }}/edit" class="btn btn-primary btn-md">
                                     <i class="fa fa-edit"></i> Edit

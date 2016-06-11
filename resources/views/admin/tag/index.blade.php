@@ -1,6 +1,15 @@
 <!-- 导入模板 -->
 @extends('admin.layout')
 
+@section('styles')
+    <style>
+        td{
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="container-fluid">
         <div class="row page-title-row">
@@ -26,11 +35,9 @@
                         <tr>
                             <th>Tag</th>
                             <th>Title</th>
-                            <th class="hidden-sm">Subtitle</th>
-                            <th class="hidden-md">Page Image</th>
+                            <th class="hidden-xs">Subtitle</th>
                             <th class="hidden-md">Meta Description</th>
-                            <th class="hidden-md">Layout</th>
-                            <th class="hidden-sm">Direction</th>
+                            <th class="hidden-xs">Direction</th>
                             <th data-sortable="false">Actions</th>
                         </tr>
                      </thead>
@@ -40,11 +47,9 @@
                         <tr>
                             <td>{{ $tag->tag }}</td>
                             <td>{{ $tag->title }}</td>
-                            <td class="hidden-sm">{{ $tag->subtitle }}</td>
-                            <td class="hidden-md">{{ $tag->page_image }}</td>
+                            <td class="hidden-xs">{{ $tag->subtitle }}</td>
                             <td class="hidden-md">{{ $tag->meta_description }}</td>
-                            <td class="hidden-md">{{ $tag->layout }}</td>
-                            <td class="hidden-sm">
+                            <td class="hidden-xs">
                                 @if ($tag->reverse_direction)
                                     Reverse
                                 @else
