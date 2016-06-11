@@ -25,7 +25,8 @@
         @if($posts)
         {{-- 文章列表 --}}
         @foreach ($posts as $post)
-          <div class="post-preview">
+            <!--为div添加style，使自动换行，保证小屏幕上显示不会超出屏幕-->
+          <div class="post-preview" style="word-wrap: break-word;word-break: normal">
             <!--点击标题或副标题显示博客内容-->
             <a href="/blog/{{ $post->id }}">
               <h2 class="post-title">{{ $post->title }}</h2>
